@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comic Craft | Interactive Comic Story</title>
+<style>
+:root{--bg:#080b16;--panel:#11172a;--panel2:#18213a;--text:#f7f8ff;--muted:#aeb8d0;--accent:#7c5cff;--accent2:#20d9ff;--line:#2c3859}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#18245a 0,#080b16 45%);color:var(--text);line-height:1.6}
+header{position:sticky;top:0;z-index:10;background:rgba(8,11,22,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{max-width:1180px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:25px;font-weight:900;letter-spacing:1px}.logo span{color:var(--accent2)}
+nav a{color:var(--text);text-decoration:none;margin-left:18px;font-weight:700}nav a:hover{color:var(--accent2)}
+.hero{max-width:1180px;margin:auto;padding:90px 22px 65px;display:grid;grid-template-columns:1.3fr .7fr;gap:35px;align-items:center}
+.badge{display:inline-block;border:1px solid var(--accent2);padding:7px 12px;border-radius:30px;color:var(--accent2);font-weight:700}
+h1{font-size:clamp(46px,7vw,88px);line-height:.95;margin:18px 0}.gradient{background:linear-gradient(90deg,#fff,#20d9ff,#8f6cff);-webkit-background-clip:text;color:transparent}
+.hero p{font-size:18px;color:var(--muted);max-width:680px}.btn{display:inline-block;margin-top:18px;padding:13px 20px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;text-decoration:none;font-weight:900}
+.hero-art{min-height:360px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#11172a,#243261);display:grid;place-items:center;box-shadow:0 20px 60px rgba(0,0,0,.35);transform:rotate(2deg)}
+.comic-burst{width:250px;height:250px;border-radius:50%;display:grid;place-items:center;background:#f4e74e;color:#10121a;font-weight:1000;font-size:30px;text-align:center;border:12px solid #fff;box-shadow:10px 12px 0 #ff4f75;transform:rotate(-7deg)}
+section{max-width:1180px;margin:auto;padding:65px 22px}.section-title{font-size:38px;margin:0 0 12px}.sub{color:var(--muted);margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:20px;padding:22px;transition:.25s}.card:hover{transform:translateY(-6px);border-color:var(--accent2)}
+.card h3{margin:0 0 8px}.tag{display:inline-block;font-size:12px;color:var(--accent2);border:1px solid #31506b;border-radius:20px;padding:3px 8px;margin-bottom:10px}.card p{color:var(--muted)}
+.search{width:100%;padding:15px 18px;border-radius:12px;border:1px solid var(--line);background:#0d1222;color:white;font-size:16px;margin-bottom:20px}
+.character{display:flex;gap:16px;align-items:center}.avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:27px;font-weight:900}
+.story{display:none;background:#0b1020;border:1px solid var(--line);padding:24px;border-radius:18px;margin-top:20px}.story.active{display:block}.panel{padding:20px;margin:14px 0;background:#171e34;border-left:5px solid var(--accent2);border-radius:8px}
+footer{text-align:center;padding:35px 20px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero-art{min-height:260px}nav{align-items:flex-start;flex-direction:column}nav a{margin:0 12px 0 0}}
+</style>
+</head>
+<body>
+<header><nav><div class="logo">COMIC<span>CRAFT</span></div><div><a href="#home">Home</a><a href="#comics">Comics</a><a href="#characters">Characters</a><a href="#story">Story</a></div></nav></header>
+<main>
+<section class="hero" id="home">
+<div><span class="badge">DIGITAL COMIC STORY PROJECT</span><h1><span class="gradient">COMIC<br>CRAFT</span></h1><p>A modern interactive space for exploring comic stories, characters and chapters through a clean superhero-inspired web interface.</p><a class="btn" href="#comics">Explore Comics →</a></div>
+<div class="hero-art"><div class="comic-burst">POW!<br>CREATE<br>YOUR STORY</div></div>
+</section>
+<section id="comics"><h2 class="section-title">Comic Library</h2><p class="sub">Explore the stories prepared for the Comic Craft concept.</p><input id="search" class="search" placeholder="Search comics by title or category..." oninput="filterComics()"><div id="comicGrid" class="grid">
+<article class="card comic" data-search="iron man superhero marvel technology"><span class="tag">SUPERHERO</span><h3>Iron Man: Arc Reactor</h3><p>A technology-driven hero discovers that courage is more powerful when combined with innovation.</p><button class="btn" onclick="showStory('iron')">Read Story</button></article>
+<article class="card comic" data-search="cosmic guardians science fiction adventure"><span class="tag">SCI-FI</span><h3>Cosmic Guardians</h3><p>A young team protects a city from a mysterious energy signal coming from deep space.</p><button class="btn" onclick="showStory('cosmic')">Read Story</button></article>
+<article class="card comic" data-search="shadow city mystery action"><span class="tag">MYSTERY</span><h3>Shadow City</h3><p>A hidden message leads three friends into a mystery beneath the lights of their city.</p><button class="btn" onclick="showStory('shadow')">Read Story</button></article>
+</div></section>
+<section id="characters"><h2 class="section-title">Characters</h2><p class="sub">Example character profiles for the digital comic experience.</p><div class="grid">
+<div class="card character"><div class="avatar">IR</div><div><h3>Iron Ranger</h3><p>Inventor • Protector • Tech Hero</p></div></div>
+<div class="card character"><div class="avatar">CG</div><div><h3>Nova</h3><p>Explorer • Strategist • Guardian</p></div></div>
+<div class="card character"><div class="avatar">SC</div><div><h3>Shadow</h3><p>Detective • Analyst • Mystery Solver</p></div></div>
+</div></section>
+<section id="story"><h2 class="section-title">Story Viewer</h2><p class="sub">Select a comic from the library to display its story panels.</p>
+<div id="iron" class="story"><h3>Iron Man: Arc Reactor</h3><div class="panel"><b>Panel 1:</b> A brilliant inventor notices a strange energy reading in his laboratory.</div><div class="panel"><b>Panel 2:</b> The prototype reactor becomes unstable, forcing him to make a difficult choice.</div><div class="panel"><b>Panel 3:</b> He uses creativity instead of fear and stabilizes the system.</div><div class="panel"><b>Panel 4:</b> The city lights return as the hero realizes that technology matters most when it helps people.</div></div>
+<div id="cosmic" class="story"><h3>Cosmic Guardians</h3><div class="panel"><b>Panel 1:</b> A mysterious signal appears above the city.</div><div class="panel"><b>Panel 2:</b> Three young guardians trace the signal to an abandoned observatory.</div><div class="panel"><b>Panel 3:</b> They discover a device sending a warning from space.</div><div class="panel"><b>Panel 4:</b> Working together, they decode the message and prevent a city-wide blackout.</div></div>
+<div id="shadow" class="story"><h3>Shadow City</h3><div class="panel"><b>Panel 1:</b> A coded note appears on a street mural.</div><div class="panel"><b>Panel 2:</b> The friends follow the clues through hidden city landmarks.</div><div class="panel"><b>Panel 3:</b> They uncover an old community archive.</div><div class="panel"><b>Panel 4:</b> The final clue reveals a forgotten story that changes how they see their city.</div></div>
+</section>
+</main>
+<footer>COMIC CRAFT • Academic Project • HTML + CSS + JavaScript</footer>
+<script>
+function filterComics(){const q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.comic').forEach(c=>c.style.display=c.dataset.search.includes(q)?'block':'none')}
+function showStory(id){document.querySelectorAll('.story').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('story').scrollIntoView({behavior:'smooth'})}
+</script>
+</body>
+</html>
